@@ -39,10 +39,10 @@ import brand from "../../assets/brand.svg";
     <!-- Nav Menu -->
     <div
       id="navmenu"
-      class="bg-[#fff] w-full absolute top-full z-10 xl:static xl:flex xl:flex-grow xl:items-center xl:justify-center overflow-hidden transition-height duration-500 h-0 xl:h-auto"
+      class="bg-[#fff] w-full absolute top-full z-10 xl:static xl:flex xl:flex-grow xl:items-center xl:justify-end overflow-hidden transition-height duration-500 h-0 xl:h-auto"
     >
       <!-- Nav Links -->
-      <ul class="xl:flex xl:flex-grow xl:justify-center xl:gap-10">
+      <ul class="xl:flex xl:flex-grow xl:justify-end xl:gap-10">
         {
           navLinks.map((link) => {
             return (
@@ -55,11 +55,6 @@ import brand from "../../assets/brand.svg";
           })
         }
       </ul>
-
-      <!-- Login -->
-      <div class="flex xl:flex-row xl:items-center px-4 xl:gap-4 flex-col">
-        <button class="btn-secondary">Presupuestanos</button>
-      </div>
     </div>
 
     <!-- Hamburger menu -->
@@ -75,6 +70,7 @@ import brand from "../../assets/brand.svg";
     </button>
   </nav>
 </div>
+
 <script>
   document.addEventListener("DOMContentLoaded", (_) => {
     const menuButton = document.getElementById("menuButton");
@@ -112,27 +108,10 @@ import brand from "../../assets/brand.svg";
           navMenu.style.height = "auto";
           navMenu.classList.remove("h-0");
         } else {
-          /* Prevent opened menu when going from bit to small */
+          /* Prevent opened menu when going from big to small */
           navMenu.style.height = "0px";
         }
       });
     }
   });
 </script>
-
-<!-- 
-  Use to highlight the active link in the navigation bar
-  Gotta test in dev and prod bc sometimes it doesn't work
----
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
----
-
-<nav>
-  <a class={currentPath === "" ? "active" : ""} href="/">Home</a>
-  <a class={currentPath === "portfolio" ? "active" : ""} href="/portfolio">Portfolio</a>
-  <a class={currentPath === "posts" ? "active" : ""} href="/posts">Article</a>
-  <a class={currentPath === "about" ? "active" : ""} href="/about">About Me</a>
-  <a class={currentPath === "contact" ? "active" : ""} href="/contact">Contact Me</a>
-</nav>
--->

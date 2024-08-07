@@ -15,6 +15,7 @@ export default {
         black: "var(--black)",
         dark: "var(--dark)",
         white: "var(--white)",
+       'custom-blue': '#A9D6E5', // Agrega tu color personalizado
       },
     },
   },
