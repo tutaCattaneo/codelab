@@ -1,4 +1,5 @@
 ---
+// Importar el componente AccordionItem
 import AccordionItem from "./AccordionItem.astro";
 
 const content = [
@@ -38,10 +39,10 @@ const content = [
 <div>
   {content.map((item) => (
     <AccordionItem
+      
       index={item.index}
       title={item.title}
       description={item.description}
     />
   ))}
 </div>
-
