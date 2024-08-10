@@ -2,7 +2,7 @@
 import Footer from "../components/ui/Footer.astro";
 import Navbar from "../components/ui/Navbar.astro";
 import MainHead from "./MainHead.astro";
-import whatsappIcon from '../assets/icons/icons8-whatsapp-64.png'; // Asegúrate de tener este ícono en tu proyecto
+import whatsappIcon from '../assets/icons/icons8-whatsapp-123.png'; // Asegúrate de tener este ícono en tu proyecto
 
 const { ...props } = Astro.props;
 ---
@@ -36,6 +36,12 @@ const { ...props } = Astro.props;
       width: 100%;
       height: 100%;
       object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+      .whatsapp-icon {
+        right: 40px; /* Mueve el ícono más a la izquierda en pantallas grandes */
+      }
     }
   </style>
   <script src="../utils/lenis"></script>
