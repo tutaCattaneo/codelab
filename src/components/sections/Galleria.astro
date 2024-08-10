@@ -1,5 +1,4 @@
 ---
-
 import imagen4 from '../../assets/pics/branding1.jpg';
 import imagen5 from '../../assets/pics/branding4.jpg';
 import imagen6 from '../../assets/pics/branding3.jpg';
@@ -8,15 +7,12 @@ import imagen8 from '../../assets/pics/web2.jpg';
 import imagen9 from '../../assets/pics/web5.jpg';
 import imagen11 from '../../assets/pics/imagen11.jpg';
 
-
-
 type Section = {
   name: string;
   id: string;
   images: string[];
 };
 
-// Filtramos las imágenes para asegurarnos de que no haya undefined
 const sections: Section[] = [
   {
     name: "Desarrollo Web",
@@ -25,7 +21,6 @@ const sections: Section[] = [
       imagen7?.src,
       imagen8?.src,
       imagen11?.src,
-      
     ].filter(Boolean) as string[],
   },
   {
@@ -43,35 +38,34 @@ const activeSectionId = sections[0].id;
 ---
 
 <div id="galleria" class="gallery-container flex flex-col items-center justify-center mt-12">
-    <!-- Navigation -->
-    <nav class="gallery-nav flex gap-4 mb-6">
-      {sections.map((section) => (
-        <button
-          class={`nav-button ${activeSectionId === section.id ? "active" : ""}`}
-          data-section-id={section.id}
-        >
-          {section.name}
-        </button>
-      ))}
-    </nav>
-  
-    <!-- Gallery -->
-    <div class="gallery-content">
-      {sections.map((section) => (
-        <div
-          class={`gallery-section ${activeSectionId === section.id ? "block" : "hidden"}`}
-          id={section.id}
-        >
-          <div class="carousel flex gap-4 overflow-x-auto snap-x snap-mandatory">
-            {section.images.map((image) => (
-              <img src={image} alt={section.name} class="carousel-image snap-center" />
-            ))}
-          </div>
+  <!-- Navigation -->
+  <nav class="gallery-nav flex gap-4 mb-6">
+    {sections.map((section) => (
+      <button
+        class={`nav-button ${activeSectionId === section.id ? "active" : ""}`}
+        data-section-id={section.id}
+      >
+        {section.name}
+      </button>
+    ))}
+  </nav>
+
+  <!-- Gallery -->
+  <div class="gallery-content">
+    {sections.map((section) => (
+      <div
+        class={`gallery-section ${activeSectionId === section.id ? "block" : "hidden"}`}
+        id={section.id}
+      >
+        <div class="carousel flex gap-4 overflow-x-auto snap-x snap-mandatory">
+          {section.images.map((image) => (
+            <img src={image} alt={section.name} class="carousel-image snap-center hover-effect" />
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
   </div>
-  
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -107,47 +101,72 @@ const activeSectionId = sections[0].id;
 </script>
 
 <style>
-  .gallery-container {
-    text-align: center;
-    margin: 0 auto;
-    max-width: 950px; /* Reduce el tamaño máximo del contenedor de la galería */
-    margin-top: 3rem; /* Ajusta este valor para más o menos espacio */
-  }
-
-  .nav-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #f3f3f3;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .nav-button.active {
-    background-color: #007EA7;
-    color: white;
-  }
-
-  .gallery-section {
-    display: none;
-  }
-
-  .gallery-section.block {
-    display: block;
-  }
-
-  .carousel {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto; /* Permite desplazamiento horizontal en móviles */
-    scroll-snap-type: x mandatory; /* Habilita el scroll snapping */
-  }
-
-  .carousel-image {
-    width: 100%;
-    max-width: 300px; /* Reduce el tamaño máximo de las imágenes */
-    height: auto;
-    object-fit: cover;
-    border-radius: 8px;
-    scroll-snap-align: center; /* Centra la imagen en el viewport cuando se hace scroll */
-  }
-</style>
+    .gallery-container {
+      text-align: center;
+      margin: 0 auto;
+      max-width: 950px;
+      margin-top: 3rem;
+    }
+  
+    .nav-button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #f3f3f3;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .nav-button.active {
+      background-color: #007EA7;
+      color: white;
+    }
+  
+    .gallery-section {
+      display: none;
+    }
+  
+    .gallery-section.block {
+      display: block;
+    }
+  
+    .carousel {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+  
+    .carousel-image {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+  
+    .carousel-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    }
+  
+    /* Media Query para Pantallas Desktop y Notebook */
+    @media (min-width: 1024px) {
+      .gallery-container {
+        max-width: 1200px; /* Incrementa el tamaño máximo del contenedor de la galería en pantallas grandes */
+      }
+  
+      .carousel-image {
+        max-width: 400px; /* Incrementa el tamaño máximo de las imágenes en pantallas grandes */
+      }
+    }
+  </style>
+  
+  
