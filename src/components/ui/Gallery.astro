@@ -1,0 +1,147 @@
+---
+import imagen1 from '../../assets/pics/imagen1.jpg';
+import imagen2 from '../../assets/pics/imagen2.jpg';
+import imagen3 from '../../assets/pics/imagen3.jpg';
+import imagen4 from '../../assets/pics/branding1.jpg';
+import imagen5 from '../../assets/pics/branding4.jpg';
+import imagen6 from '../../assets/pics/branding3.jpg';
+
+type Section = {
+  name: string;
+  id: string;
+  images: string[];
+};
+
+// Filtramos las imágenes para asegurarnos de que no haya undefined
+const sections: Section[] = [
+  {
+    name: "Desarrollo Web",
+    id: "web-development",
+    images: [
+      imagen1?.src,
+      imagen2?.src,
+      imagen3?.src,
+    ].filter(Boolean) as string[],
+  },
+  {
+    name: "Branding",
+    id: "branding",
+    images: [
+      imagen4?.src,
+      imagen5?.src,
+      imagen6?.src,
+    ].filter(Boolean) as string[],
+  },
+];
+
+const activeSectionId = sections[0].id;
+---
+
+<div class="gallery-container flex flex-col items-center justify-center mt-12">
+  <!-- Navigation -->
+  <nav class="gallery-nav flex gap-4 mb-6">
+    {sections.map((section) => (
+      <button
+        class={`nav-button ${activeSectionId === section.id ? "active" : ""}`}
+        data-section-id={section.id}
+      >
+        {section.name}
+      </button>
+    ))}
+  </nav>
+
+  <!-- Gallery -->
+  <div class="gallery-content">
+    {sections.map((section) => (
+      <div
+        class={`gallery-section ${activeSectionId === section.id ? "block" : "hidden"}`}
+        id={section.id}
+      >
+        <div class="carousel flex gap-4 overflow-x-auto snap-x snap-mandatory">
+          {section.images.map((image) => (
+            <img src={image} alt={section.name} class="carousel-image snap-center" />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".nav-button");
+    const sections = document.querySelectorAll(".gallery-section");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const sectionId = button.getAttribute("data-section-id");
+
+        // Verificar que sectionId no sea null
+        if (!sectionId) return;
+
+        // Hide all sections
+        sections.forEach(section => {
+          section.classList.add("hidden");
+          section.classList.remove("block");
+        });
+
+        // Show the selected section
+        const activeSection = document.getElementById(sectionId);
+        if (activeSection) {
+          activeSection.classList.add("block");
+          activeSection.classList.remove("hidden");
+        }
+
+        // Update button active state
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+      });
+    });
+  });
+</script>
+
+<style>
+  .gallery-container {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 800px;
+    margin-top: 3rem; /* Ajusta este valor para más o menos espacio */
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f3f3f3;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .nav-button.active {
+    background-color: #007EA7;
+    color: white;
+  }
+
+  .gallery-section {
+    display: none;
+  }
+
+  .gallery-section.block {
+    display: block;
+  }
+
+  .carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto; /* Permite desplazamiento horizontal en móviles */
+    scroll-snap-type: x mandatory; /* Habilita el scroll snapping */
+  }
+
+  .carousel-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    scroll-snap-align: center; /* Centra la imagen en el viewport cuando se hace scroll */
+  }
+</style>
