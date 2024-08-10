@@ -1,10 +1,13 @@
 ---
-import imagen1 from '../../assets/pics/imagen1.jpg';
-import imagen2 from '../../assets/pics/imagen2.jpg';
-import imagen3 from '../../assets/pics/imagen3.jpg';
+
 import imagen4 from '../../assets/pics/branding1.jpg';
 import imagen5 from '../../assets/pics/branding4.jpg';
 import imagen6 from '../../assets/pics/branding3.jpg';
+import imagen7 from '../../assets/pics/web1.jpg';
+import imagen8 from '../../assets/pics/web2.jpg';
+import imagen9 from '../../assets/pics/web5.jpg';
+
+
 
 type Section = {
   name: string;
@@ -18,9 +21,10 @@ const sections: Section[] = [
     name: "Desarrollo Web",
     id: "web-development",
     images: [
-      imagen1?.src,
-      imagen2?.src,
-      imagen3?.src,
+      imagen7?.src,
+      imagen8?.src,
+      imagen9?.src,
+      
     ].filter(Boolean) as string[],
   },
   {
