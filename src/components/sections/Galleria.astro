@@ -37,35 +37,36 @@ const sections: Section[] = [
 const activeSectionId = sections[0].id;
 ---
 
-<div class="gallery-container flex flex-col items-center justify-center mt-12" >
-  <!-- Navigation -->
-  <nav class="gallery-nav flex gap-4 mb-6" id='galleria'>
-    {sections.map((section) => (
-      <button
-        class={`nav-button ${activeSectionId === section.id ? "active" : ""}`}
-        data-section-id={section.id}
-      >
-        {section.name}
-      </button>
-    ))}
-  </nav>
-
-  <!-- Gallery -->
-  <div class="gallery-content" >
-    {sections.map((section) => (
-      <div
-        class={`gallery-section ${activeSectionId === section.id ? "block" : "hidden"}`}
-        id={section.id}
-      >
-        <div class="carousel flex gap-4 overflow-x-auto snap-x snap-mandatory">
-          {section.images.map((image) => (
-            <img src={image} alt={section.name} class="carousel-image snap-center" />
-          ))}
+<div id="galleria" class="gallery-container flex flex-col items-center justify-center mt-12">
+    <!-- Navigation -->
+    <nav class="gallery-nav flex gap-4 mb-6">
+      {sections.map((section) => (
+        <button
+          class={`nav-button ${activeSectionId === section.id ? "active" : ""}`}
+          data-section-id={section.id}
+        >
+          {section.name}
+        </button>
+      ))}
+    </nav>
+  
+    <!-- Gallery -->
+    <div class="gallery-content">
+      {sections.map((section) => (
+        <div
+          class={`gallery-section ${activeSectionId === section.id ? "block" : "hidden"}`}
+          id={section.id}
+        >
+          <div class="carousel flex gap-4 overflow-x-auto snap-x snap-mandatory">
+            {section.images.map((image) => (
+              <img src={image} alt={section.name} class="carousel-image snap-center" />
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
-</div>
+  
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
